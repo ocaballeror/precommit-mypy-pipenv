@@ -11,7 +11,6 @@ from packaging.version import Version
 
 
 def main():
-    breakpoint()
     with open(Path(__file__).parent / "pyproject.toml", "rb") as f:
         pyproject = tomli.load(f)
 
