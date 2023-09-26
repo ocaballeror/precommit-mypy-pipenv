@@ -12,7 +12,7 @@ def main():
 
     if not reqs.is_file():
         out = sp.check_output(
-            ["pipenv", "requirements", "--dev"], env=os.environ | {"PIPENV_VERBOSITY": "1"}
+            ["pipenv", "requirements", "--dev"], env=os.environ | {"PIPENV_VERBOSITY": "-1"}
         )
         reqs.write_bytes(out)
         ret = sp.run(["pip", "install", "-qr", str(reqs)], text=True)
