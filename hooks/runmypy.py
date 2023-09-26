@@ -15,7 +15,7 @@ def main():
             ["pipenv", "requirements", "--dev"], env=os.environ | {"PIPENV_VERBOSITY": "1"}
         )
         reqs.write_bytes(out)
-        sp.check_call(["pip", "install", "-r", str(reqs)])
+        ret = sp.run(["pip", "install", "-qr", str(reqs)], text=True)
 
     ret = sp.run(["mypy", *sys.argv[1:]], capture_output=False)
     return ret.returncode
