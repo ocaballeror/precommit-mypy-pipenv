@@ -1,7 +1,7 @@
 - id: mypy
   name: mypy
   entry: ./mypy.sh
-  args: [--ignore-missing-imports, --scripts-are-modules, --non-interactive, --install-types, --allow-any-generics]
+  args: [--ignore-missing-imports, --scripts-are-modules, --non-interactive, --install-types]
   'types_or': [python, pyi]
   language: python
   additional_dependencies:
