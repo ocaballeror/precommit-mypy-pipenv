@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-cd "$(dirname "$0")"
-reqs=/tmp/reqs-$(basename $PWD)-$(md5sum Pipfile.lock | awk '{print $1}')
+tmp="$(dirname $VIRTUAL_ENV)/tmp"
+mkdir -p "$tmp"
+reqs="$tmp/reqs-$(md5sum Pipfile.lock | awk '{print $1}')"
 if ! [ -f "$reqs" ]; then
-  rm -f /tmp/reqs-$(basename $PWD)-*
   pipenv requirements > $reqs
   pip install -r $reqs
 fi
-
 mypy "$@"
