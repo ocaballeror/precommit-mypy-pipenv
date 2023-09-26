@@ -4,6 +4,6 @@
   args: [--ignore-missing-imports, --scripts-are-modules, --non-interactive, --install-types]
   'types_or': [python, pyi]
   language: python
-  pass_filenames: false
+  pass_filenames: true
   require_serial: true
   minimum_pre_commit_version: 2.9.2
