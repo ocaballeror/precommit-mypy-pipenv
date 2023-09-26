@@ -1,0 +1,13 @@
+- id: mypy
+  name: mypy
+  entry: ./mypy.sh
+  args: [--ignore-missing-imports, --scripts-are-modules, --non-interactive, --install-types, --allow-any-generics]
+  'types_or': [python, pyi]
+  language: python
+  additional_dependencies:
+    - mypy==1.5.1
+    - pipenv
+  types: [python]
+  pass_filenames: false
+  require_serial: true
+  minimum_pre_commit_version: 2.9.2
