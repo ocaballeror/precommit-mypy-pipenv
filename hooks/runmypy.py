@@ -10,12 +10,13 @@ def main():
     tmp.mkdir(parents=True, exist_ok=True)
     reqs = tmp / ("reqs-" + hashlib.md5(open("Pipfile.lock", "rb").read()).hexdigest())
 
-    if not reqs.is_file():
-        out = sp.check_output(["pipenv", "requirements"])
-        reqs.write_bytes(out)
-        sp.check_call(["pip", "install", "-r", str(reqs)])
+    # if not reqs.is_file():
+    #     out = sp.check_output(["pipenv", "requirements"])
+    #     reqs.write_bytes(out)
+    #     sp.check_call(["pip", "install", "-r", str(reqs)])
 
-    sp.check_call(["mypy", *sys.argv[1:]])
+    ret = sp.run(["mypy", *sys.argv[1:]], capture_output=False)
+    return ret.returncode
 
 
 if __name__ == "__main__":
