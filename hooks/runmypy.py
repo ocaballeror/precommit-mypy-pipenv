@@ -11,7 +11,9 @@ def main():
     reqs = tmp / ("reqs-" + hashlib.md5(open("Pipfile.lock", "rb").read()).hexdigest())
 
     if not reqs.is_file():
-        out = sp.check_output(["pipenv", "requirements"])
+        out = sp.check_output(
+            ["pipenv", "requirements", "--dev"], env=os.environ | {"PIPENV_VERBOSITY": "1"}
+        )
         reqs.write_bytes(out)
         sp.check_call(["pip", "install", "-r", str(reqs)])
 
