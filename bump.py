@@ -40,7 +40,7 @@ def main():
             tomli_w.dump(pyproject, f)
         subprocess.check_call(["git", "add", "pyproject.toml"])
         subprocess.check_call(["git", "commit", "-m", f"Bump mypy: {version}"])
-        subprocess.check_call(["git", "tag", version])
+        subprocess.check_call(["git", "tag", str(version)])
 
 
 if __name__ == "__main__":
