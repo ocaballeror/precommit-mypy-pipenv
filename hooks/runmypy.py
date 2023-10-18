@@ -60,8 +60,10 @@ class Pyproject(DepHandler):
         with open("pyproject.toml", "rb") as f:
             pyproject = toml.load(f)
 
-        all_deps = pyproject["project"].get("dependencies", [])
-        return "\n".join(all_deps)
+        std_deps = pyproject["project"].get("dependencies", [])
+        opt_groups = pyproject["project"].get("optional-dependencies", {})
+        opt_deps = [dep for ext in opt_groups.values() for dep in ext]
+        return "\n".join(std_deps + opt_deps)
 
     def reqs_hash(self) -> str:
         return "reqs-" + str(hash(self.requirements()))
