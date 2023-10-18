@@ -1,4 +1,8 @@
-import tomli
+try:
+    import tomllib as toml
+except ImportError:
+    import tomli as toml
+
 import sys
 import os
 import subprocess as sp
@@ -54,9 +58,9 @@ class Pyproject(DepHandler):
 
     def requirements(self) -> str:
         with open("pyproject.toml", "rb") as f:
-            pyproject = tomli.load(f)
+            pyproject = toml.load(f)
 
-        all_deps = pyproject["project"]["dependencies"]
+        all_deps = pyproject["project"].get("dependencies", [])
         return "\n".join(all_deps)
 
     def reqs_hash(self) -> str:
