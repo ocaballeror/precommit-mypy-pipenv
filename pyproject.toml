@@ -10,3 +10,8 @@ dependencies = [
 
 [project.scripts]
 runmypy = "hooks.runmypy:main"
+
+[tool.setuptools]
+packages = [
+    "hooks",
+]
