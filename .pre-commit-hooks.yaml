@@ -1,7 +1,7 @@
 - id: mypy
   name: mypy
   entry: runmypy
-  args: [--ignore-missing-imports, --scripts-are-modules, --non-interactive, --install-types]
+  args: [--scripts-are-modules, --non-interactive, --install-types]
   'types_or': [python, pyi]
   language: python
   pass_filenames: true
