@@ -20,5 +20,7 @@ jobs:
     - run: |
         git remote set-url origin https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY
         git push origin HEAD:refs/heads/master --tags
+        git tag | grep -v "$(gh release ls | cut -f3)" | xargs -i gh release create {} --notes "Bump mypy: {}"
+        gh release edit "$(git tag | tail -1)" --latest
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
