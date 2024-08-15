@@ -11,6 +11,6 @@ repos:
     rev: v1.10.0
     hooks:
       - id: mypy
-        args: [--allow-any-generics]
+        args: [--allow-any-generics, app, tests]
         additional_dependencies: [pydantic<2]
 ```

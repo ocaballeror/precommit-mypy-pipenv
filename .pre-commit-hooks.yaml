@@ -4,6 +4,6 @@
   args: [--scripts-are-modules]
   'types_or': [python, pyi]
   language: python
-  pass_filenames: true
+  pass_filenames: false
   require_serial: true
   minimum_pre_commit_version: 2.9.2
