@@ -1,5 +1,6 @@
 # stolen from: https://github.com/psf/black-pre-commit-mirror/blob/main/mirror.py
 
+import re
 import subprocess
 from pathlib import Path
 
@@ -36,8 +37,17 @@ def main():
 
     for version in versions:
         pyproject["project"]["dependencies"].insert(0, f"mypy=={version}")
-        with open(Path(__file__).parent / "pyproject.toml", "wb") as f:
+        here = Path(__file__).parent
+        with open(here / "pyproject.toml", "wb") as f:
             tomli_w.dump(pyproject, f)
+
+        readme = here / "README.md"
+        data = readme.read_text()
+        with open(readme, "w") as f:
+            for line in data.splitlines():
+                line = re.sub("( *rev: ).*", r"\1" + version, line)
+                f.write(line + "\n")
+
         subprocess.check_call(["git", "add", "pyproject.toml"])
         subprocess.check_call(["git", "commit", "-m", f"Bump mypy: {version}"])
         subprocess.check_call(["git", "tag", f"v{version}"])
